@@ -102,7 +102,6 @@ func calculateTotalPoints(receipt Receipt) int {
 	}
 	// fmt.Println(totalPoints)
 
-
 	// 25 points if the total is a multiple of 0.25.
 	cents, _ := strconv.Atoi(totalParts[1])
 	if cents%25 == 0 {
@@ -110,11 +109,9 @@ func calculateTotalPoints(receipt Receipt) int {
 	}
 	// fmt.Println(totalPoints)
 
-
 	// 5 points for every two items on the receipt.
-	totalPoints += 5*(len(receipt.Items) / 2)
+	totalPoints += 5 * (len(receipt.Items) / 2)
 	// fmt.Println(totalPoints)
-
 
 	// If the trimmed length of the item description is a multiple of 3, multiply the price by 0.2 and round up to the nearest integer. The result is the number of points earned.
 	for _, item := range receipt.Items {
@@ -134,15 +131,13 @@ func calculateTotalPoints(receipt Receipt) int {
 	}
 	// fmt.Println(totalPoints)
 
-
 	// 6 points if the day in the purchase date is odd.
 	dateParts := strings.Split(receipt.PurchaseDate, "-")
 	day, _ := strconv.Atoi(dateParts[2])
-	if (day%2 != 0) {
+	if day%2 != 0 {
 		totalPoints += 6
 	}
 	// fmt.Println(totalPoints)
-
 
 	// 10 points if the time of purchase is after 2:00pm and before 4:00pm.
 	timeParts := strings.Split(receipt.PurchaseTime, ":")
