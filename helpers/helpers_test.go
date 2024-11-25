@@ -57,26 +57,26 @@ func TestTotalCostCalculations(t *testing.T) {
 		t.Fatalf("Points %v did not match %v for total cost points", points, 0)
 	}
 }
-func TestItemCalculations(t *testing.T)      {
+func TestItemCalculations(t *testing.T) {
 	points := CalculateItemPoints(targetReceipt)
 	if points != 16 {
 		t.Fatalf("Points %v did not match %v for item points", points, 16)
 	}
 }
-func TestDatecCalculations(t *testing.T)     {
+func TestDatecCalculations(t *testing.T) {
 	points := CalculateDatePoints(targetReceipt)
 	if points != 6 {
 		t.Fatalf("Points %v did not match %v for date points", points, 6)
 	}
 }
-func TestTimeCalculations(t *testing.T)      {
+func TestTimeCalculations(t *testing.T) {
 	points := CalculateTimePoints(targetReceipt)
 	if points != 0 {
 		t.Fatalf("Points %v did not match %v for time points", points, 0)
 	}
 }
 
-func TestReceiptValidation(t *testing.T)      {
+func TestReceiptValidation(t *testing.T) {
 	result, errMsg := ValidateReceipt(targetReceipt)
 
 	if !result {

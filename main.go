@@ -3,10 +3,10 @@ package main
 import (
 	"net/http"
 
-	"github.com/nblumenfeld/fetch-take-home/helpers"
-	"github.com/nblumenfeld/fetch-take-home/models"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"github.com/nblumenfeld/fetch-take-home/helpers"
+	"github.com/nblumenfeld/fetch-take-home/models"
 	"go.uber.org/zap"
 )
 
@@ -25,15 +25,13 @@ func main() {
 func postReceipts(c *gin.Context) {
 	var newReceipt models.Receipt
 
-	
 	logger, _ := zap.NewProduction()
-	defer logger.Sync() 
+	defer logger.Sync()
 	sugar := logger.Sugar()
-
-	sugar.Info("Some info")
 
 	// Bind the received JSON to newReceipt
 	if err := c.BindJSON(&newReceipt); err != nil {
+		sugar.Error("Error processing receipt from JSON")
 		return
 	}
 
