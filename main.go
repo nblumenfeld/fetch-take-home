@@ -3,10 +3,11 @@ package main
 import (
 	"net/http"
 
-	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
 	"github.com/nblumenfeld/fetch-take-home/helpers"
 	"github.com/nblumenfeld/fetch-take-home/models"
+
+	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"go.uber.org/zap"
 )
 
@@ -18,7 +19,7 @@ func main() {
 	router.POST("/receipts/process", postReceipts)
 	router.GET("/receipts/:id/points", getReceiptPoints)
 
-	router.Run("localhost:8080")
+	router.Run("0.0.0.0:8080")
 }
 
 // add a receipt to the "database" and process how many points it is worth
@@ -41,6 +42,10 @@ func postReceipts(c *gin.Context) {
 	}
 
 	newReceipt.ID = uuid.New()
+
+	// N.B. This calculation could be done on retreival instead of on persistence, but I opted for
+	// calculating it on persistence as the receipts had no requirement to be changed and therefore
+	// it would be a single calculation for any number of retrievals
 	points := helpers.CalculateTotalPoints(newReceipt)
 
 	// add the receipt to the "db" and save it's points
@@ -50,7 +55,7 @@ func postReceipts(c *gin.Context) {
 	c.IndentedJSON(http.StatusCreated, gin.H{"id": newReceipt.ID})
 }
 
-// get a receipt by ID
+// get a receipts points
 func getReceiptPoints(c *gin.Context) {
 	id, _ := uuid.Parse(c.Param("id"))
 

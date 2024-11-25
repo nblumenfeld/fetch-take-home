@@ -35,6 +35,11 @@ var targetReceipt = models.Receipt{
 	},
 }
 
+// I wanted to see how it was to set up unit tests for a golang project
+// The following are all positive tests related to the target example that was provided
+// This is not exhaustive of all testing angles that could be taken, but it
+// was fun to learn how to do this in Go!
+
 // Larger function to test everything in one go
 func TestPointCalculations(t *testing.T) {
 
